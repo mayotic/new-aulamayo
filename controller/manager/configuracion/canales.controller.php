@@ -85,7 +85,7 @@ $fields = [
                               'columns'          =>  false,
                               'fields'           =>  true,
                               'disabled'         =>  false,
-                              'field_type'       =>  ['image', '', ['path' => $conf['appinfo']['approot'] . 'public/img/']],
+                              'field_type'       =>  ['image', '', ['path' => $conf['app']['approot'] . 'public/img/']],
                               'set_attr'         =>  ['details_row' => 'form-group col-md-12', 'details_field_cell' => 'col-sm-12'],
                               // 'tab'              =>  'Gestión del curso',
                             ]

@@ -19,10 +19,13 @@ class Tools {
     return $output;
   }
   public static function loadFontAwesome($version = 'v5.7.0') {
-    $output = '
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    ';
-    return $output;
+    global $conf;
+    if(!$version == 'local'){
+      $url = 'https://use.fontawesome.com/releases/' . $version . '/css/all.css';
+    }else{
+      $url = 'https://' . $conf['url'] . $conf['app']['folder'] . '/public/libraries/fontawesome/css/all.min.css';
+    }
+    return '<link rel="stylesheet" href="' . $url . '"/>';
   }
   public static function loadSelect2($version = '4.0.12') {
     $output = '
@@ -37,12 +40,7 @@ class Tools {
   }
   public static function loadResourceLibrary ($folder, $type, $name) {
     global $conf;
-    // $libfolder = explode('/', $conf['appinfo']['libfolder']);
-    $libfolder = $conf['appinfo']['libfolder'];
-    $current_path = AutoIncludes::getHttpFolder();
-    $fullfilePath = $libfolder . ($folder !== '' ? '/' : '') . $folder . '/' . $name . '.' . $type;
-    // $fullfilePath = '/' . implode('/', array_filter(array_merge($libfolder, [$folder, $name])));
-
+    $fullfilePath = $conf['app']['folder'] . $conf['app']['libraries'] . ($folder !== '' ? '/' : '') . $folder . '/' . $name . '.' . $type;
     if (file_exists(AutoIncludes::getRootPath() . $fullfilePath)) {
       switch ($type) {
         case 'js':
@@ -58,43 +56,44 @@ class Tools {
     return false;
   }
   public static function loadLibrary ($type, $name) {
-    return self::loadResourceLibrary('/' . $type, $type, $name);
+    return self::loadResourceLibrary($type, $type, $name);
   }
   public static function loadImage ($type, $name, $include_tag = false) {
     global $conf;
-    $imgfolder = $conf['appinfo']['imgfolder'] . '/';
-    $fullfilePath = $imgfolder . $name . '.' . $type;
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
+    $fullFilePath = $conf['app']['root'] . $conf['app']['images'] . '/' . $name . '.' . $type;
 
-    if (file_exists(AutoIncludes::getRootPath() . $fullfilePath)) {
+    if (file_exists($fullFilePath)) {
       if ($include_tag) {
-        return '<img src="' . $fullfilePath . '">';
+        return '<img src="' . $protocol . $conf['url'] . $conf['app']['folder'] . $conf['app']['images'] . '/' . $name . '.' . $type . '">';
       }else{
-        return $fullfilePath;
+        return  $protocol . $conf['url'] . $conf['app']['folder'] . $conf['app']['images'] . '/' . $name . '.' . $type;
       }
     }
     return false;
   }
   public static function includeFile ($folder, $name) {
-    if (file_exists($fullfilePath = AutoIncludes::getRootPath() . $folder . '/' . $name . '.php')) {
-        return include_once $fullfilePath;
+    global $conf, $tdata;
+    if (file_exists($fullfilePath = $folder . '/' . $name . '.php')) {
+        return include $fullfilePath;
     }
     return false;
   }
   public static function loadInclude($folder, $name) {
     global $conf;
-    return self::includeFile($conf['appinfo']['incfolder'] . (empty($folder) ? '' : '/' ) . $folder, $name);
+    return self::includeFile($conf['app']['root'] . $conf['app']['includes'] . (empty($folder) ? '' : '/' ) . $folder, $name);
   }
   public static function includeHook($folder, $name) {
     global $conf;
-    return self::includeFile($conf['appinfo']['hooksfolder'] . (empty($folder) ? '' : '/' ) . $folder, $name . '.hook');
+    return self::includeFile($conf['app']['root'] . $conf['app']['hooks'] . (empty($folder) ? '' : '/' ) . $folder, $name . '.hook');
   }
   public static function loadTranslation($lang) {
     global $conf;
-    return self::includeFile($conf['appinfo']['langfolder'], $lang);
+    return self::includeFile($conf['app']['root'] . $conf['app']['languages'], $lang);
   }
   public static function loadTemplatePart ($name) {
-    global $conf;
-    return self::includeFile($conf['appinfo']['tempfolder'] . '/part', $name);
+    global $conf, $tdata;
+    return self::includeFile($conf['app']['root'] . $conf['app']['templates'] . '/part', $name);
   }
   public static function loadXcrud() {
     return self::loadInclude('xcrud', 'xcrud');
@@ -117,8 +116,13 @@ class Tools {
     $comment = ($is_set and $fileDocComment[1][1][0] == '/' and $fileDocComment[1][1][1] == '*') ? $fileDocComment[1][1] : '';
     return str_replace(['/*', '*/'], ['', ''], $comment);
   }
-  public static function buildMenu($menuid = 'main', $render_tree = false, $row_template = '<a href="{{link}}">{{linkname}}</a>', $submenu_wrapper  = '<div class="sub-list">{{content}}</div>', $submenu_template = '<a class="dropdown-item" href="{{link}}">{{linkname}}</a>', $wrapper = '{{content}}', $path, $start) {
-    global $hooks;
+  public static function buildMenu( $menuid = 'main',
+                                    $render_tree = false,
+                                    $row_template = '<a href="{{link}}">{{linkname}}</a>',
+                                    $submenu_wrapper  = '<div class="sub-list">{{content}}</div>',
+                                    $submenu_template = '<a class="dropdown-item" href="{{link}}">{{linkname}}</a>',
+                                    $wrapper = '{{content}}', $path, $start) {
+    global $hooks, $conf;
     $files_tree = self::getFileTree($path . '/' . $start);
     $menu_info = [];
     $amenu = [];
@@ -146,13 +150,13 @@ class Tools {
           // Include the menu option if menu identifier matches
           if (trim($menu[0]) == $menuid) {
             if ($render_tree and $parent !== ''){
-              $amenu[$parent][$menu[2]] = ['link' => '/' . $start . ($parent == '' ? '' : '/' . $parent) . '/' .  pathinfo($file, PATHINFO_FILENAME),
+              $amenu[$parent][$menu[2]] = ['link' => $conf['app']['folder'] . '/' . $start . ($parent == '' ? '' : '/' . $parent) . '/' .  pathinfo($file, PATHINFO_FILENAME),
                                            'linkname' => $menu[1],
                                            'parentname' => $parent,
                                            'pagename' => (AutoIncludes::getFileName(true) == basename($file, '.php') ? 'active' : ''),
                                            'icon' => (isset($menu[3]) ? $menu['3'] : '')];
             }else{
-              $amenu[$menu[2]] = ['link' => ($parent == '' ? '' : '/' . $parent) . '/' . $start . '/' . pathinfo($file, PATHINFO_FILENAME),
+              $amenu[$menu[2]] = ['link' => $conf['app']['folder'] . ($parent == '' ? '' : '/' . $parent) . '/' . $start . '/' . pathinfo($file, PATHINFO_FILENAME),
                                   'linkname' => $menu[1],
                                   'pagename' => (AutoIncludes::getFileName(true) == basename($file, '.php') ? 'active' : ''),
                                   'icon' => (isset($menu[3]) ? $menu['3'] : '')];
@@ -220,7 +224,7 @@ class Tools {
         $file_name = $splFileInfo->getFilename();
         $parents = explode('/', $splFileInfo->getPathName());
         // Skip hidden files and directories. At the moment, only first level of tree is walkabout
-        if ($file_name[0] === '.' or !in_array('/' . $parents[count($parents) - 2], $conf['appinfo']['pagesfolders'])) {
+        if ($file_name[0] === '.' or !in_array('/' . $parents[count($parents) - 2], $conf['app']['pages'])) {
             continue;
         }
         $path = $splFileInfo->isDir() ? array($file_name => array()) : array($file_name);
@@ -231,6 +235,18 @@ class Tools {
     }
     return $tree;
   }
+
+  //  FOR IMPLEMENT IN THE FUTURE FOR REPLACE getFileTree()
+  // public static function getDirContents($path = false) {
+  //     $path = (!$path) ? $_SERVER['DOCUMENT_ROOT'] : $path;
+  //     $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
+  //     $files = array();
+  //     foreach ($rii as $file)
+  //         if (!$file->isDir())
+  //             $files[] = $file->getPathname();
+  //
+  //     return $files;
+  // }
 
   /* Mini template system */
   public static function tmpl($data, $row_template, $wrapper = '{{content}}') {
@@ -247,6 +263,7 @@ class Tools {
   }
   public static function redirect($url) {
     if ($url !== self::getCurrentPage()) {
+      // var_dump($url); var_dump(self::getCurrentPage()); var_dump($_SESSION['userlogedin']); exit;
       header('Location: '. $url);
       exit();
     }
@@ -257,6 +274,9 @@ class Tools {
   }
   public static function myEncrypt($string_to_encrypt, $password = 'lzyWGKfXak') {
     return openssl_encrypt($string_to_encrypt, "AES-128-ECB", $password);
+  }
+  public static function myEncryptMD5($string_to_encrypt) {
+    return md5($string_to_encrypt);
   }
   public static function myDecrypt($encrypted_string, $password = 'lzyWGKfXak') {
     return openssl_decrypt($encrypted_string, "AES-128-ECB", $password);
@@ -303,16 +323,16 @@ class Tools {
     return $new_key;
   }
 
-  public static function loginControl() {
+  public static function loginControl($url_right = false, $url_noright = false) {
     $auth = new Auth();
-    $auth->checkLoginAndRedirect();
+    $auth->checkLoginAndRedirect($url_right, $url_noright);
     return true;
   }
   public static function rightsControl($rights, $alltopass = false) {
     global $conf;
     $user = new User($_SESSION['userlogedin']);
     if(!$user->can($rights, $alltopass)) {
-      Tools::redirect($conf['appinfo']['url_home']);
+      Tools::redirect($conf['app']['url_notrights']);
     }
     return true;
   }
@@ -326,7 +346,26 @@ class Tools {
     if (isset($_SESSION['userlogedin']) and $_SESSION['userlogedin']) {
       $user = $_SESSION['userlogedin'];
     }
-    return '<script type="text/javascript">window.userlogedin = ' . (!empty($user) ? $user : 'false') . '</script>';
+    return self::varToJs('userlogedin', (!empty($user) ? $user : 'false'));
+  }
+  public static function sitevarsToJs() {
+    global $conf;
+    $site_vars = false;
+    if (!empty($conf['env'])) {
+      $site_vars['env'] = $conf['env'];
+    }
+    if (!empty($conf['url'])) {
+      $site_vars['url'] = $conf['url'];
+    }
+    if (!empty($conf['app']['folder'])) {
+      $site_vars['url'] = $conf['url'];
+    }
+    return self::varToJs('sitevars', (!empty($site_vars) ? $site_vars : false));
+  }
+  public static function varToJs($var_name, $var_value) {
+    if (!empty($var_name) and !empty($var_value)) {
+      return '<script type="text/javascript">window.' . $var_name . ' = ' . ( !is_scalar($var_value) ? json_encode($var_value) : (is_string($var_value) ? "'" . $var_value . "'" : $var_value) ) . '</script>';
+    }
   }
   public static function _t($string, $echo = true) {
     global $_l;
@@ -521,7 +560,6 @@ class Tools {
       // FK Relations
       if (isset($sets['fk_relation']) and $sets['fk_relation']) {
         if (is_array($sets['fk_relation']) and count($sets['fk_relation']) > 6) {
-          // var_dump(array_merge([$key], $sets['fk_relation'])); exit;
           call_user_func_array([$xcrud, 'fk_relation'], array_merge([$key], $sets['fk_relation']));
         }
       }
@@ -549,12 +587,19 @@ class Tools {
         $cols[] = $key;
       }
 
-      if (isset($sets['fields']) and $sets['fields']) {
-        $params = [];
-        if (isset($sets['tab'])) {
-          $params = (is_array($sets['tab']) ? $sets['tab'] : [$sets['tab']]);
+      if (isset($sets['fields'])) {
+        $params = [$key];
+
+        if (isset($sets['fields'])){
+          $params[] = !$sets['fields'];
+          if (!empty($sets['tab'])) {
+            $params[] = $sets['tab'];
+          }
+          // if ($sets['fields']){
+          call_user_func_array([$xcrud, 'fields'], $params);
+          // }
         }
-        call_user_func_array([$xcrud, 'fields'], array_merge([$key], [false], $params));
+
       }
 
       if (isset($sets['readonly']) and $sets['readonly']) {
@@ -640,7 +685,16 @@ class Tools {
     }
   }
 
-  public static function post($var) {
+  public static function post($var = false, $value = false) {
+
+    if ( !$var and !empty($_POST) ) {
+      return $_POST;
+    }
+
+    if ( $var and $value and !empty($_POST) ) {
+      return $_POST[$var] = $value;
+    }
+
     if (!empty($_POST[$var])) {
       return $_POST[$var];
     }else {
@@ -657,6 +711,54 @@ class Tools {
   }
 
   /**
+   * Checks if the array of fields/values in a $_POST structure matches
+   * the requireds array of fields/values passed as the second parameter.
+   * The requireds array has the format: ['field_name' => 'field_type']
+   * @param  [array] $fields_tocheck  Fields to check againts the requireds
+   * @param  [array] $required_fields Array of the required fields
+   * @return [boolean]  true if all required fields are present in the $fields array
+   */
+  public static function required_fields($fields_tocheck, $required_fields) {
+    $requireds = array_keys($required_fields);
+    $fields = array_keys(array_filter($fields_tocheck));
+    $intersect = array_intersect($requireds, $fields);
+
+    return (count($requireds) == count($intersect));
+  }
+
+  /**
+  * Check the format of fields values according to secon array description
+  * The formats array has the structure: ['field_name' => 'field_type']
+   * @param  [array] $fields  The array of values to format
+   * @param  [array] $formats The array of description types. Posible values: 'string', 'number', 'email'
+   * @return [array] The first array with formated values
+   */
+  public static function check_formats($fields, $formats) {
+
+    foreach ($fields as $field => $value) {
+
+      if (!empty($formats[$field])) {
+
+        switch ($formats[$field]) {
+          case 'email':
+            if (!Tools::is_valid_email($value)) {
+              return $field;
+            }
+            break;
+
+          default:
+            // code...
+            break;
+        }
+
+      }
+
+    }
+
+    return false;
+  }
+
+  /**
     *
     * Comprova si existeixen els camps a la taula i retorna
     * els que existeixen
@@ -668,21 +770,15 @@ class Tools {
     */
   public static function check_fields($fields, $table, $array_format = 'indexed') {
 
-    if ($clean_fields = self::get_fields($table)) {
-      foreach ($clean_fields as $key => $field_info) {
+    $table_fields = array_column(self::get_fields($table), 'Field');
 
-        if ($array_format == 'indexed') {
-          if (in_array($field_info->Field, $fields)) {
-            unset($fields[array_search($field_info->Field, $fields)]);
-          }
-        }else{
-          if (!isset($fields[$field_info->Field])) {
-            unset($fields[$field_info->Field]);
-          }
+    if ($table_fields) {
+      foreach ($fields as $key => $field) {
+        $camp = ($array_format == 'indexed' ? $key : $field);
+        if (!in_array($camp, $table_fields)) {
+          unset($fields[$camp]);
         }
-
       }
-
       return $fields;
     }
 
@@ -829,9 +925,9 @@ class Tools {
 
      $mail->IsHTML(true);
      if (!$mail->send()) {
-       return json_encode(['status' => 'error', 'message' => $mail->ErrorInfo]);
+       return ['status' => 'ko', 'message' => $mail->ErrorInfo];
      } else {
-         return json_encode(['status' => 'ok', 'message' => 'Mail enviado correctamente']);
+         return ['status' => 'ok', 'message' => 'Mail enviado correctamente'];
      }
   }
 
@@ -858,6 +954,10 @@ class Tools {
       }
     }
     return false;
+  }
+
+  public static function getCurrentHttpProtocol() {
+    return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
   }
 
    // public static function binaryToStringResults($recordset) {

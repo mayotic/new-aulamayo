@@ -1,6 +1,6 @@
 <?php
 defined('_DA') or exit('Restricted Access');
-include_once $_SERVER['DOCUMENT_ROOT'] . '/cms/core.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . '/cms/core.php';
 
 // Config for app
 $appconf = Tools::loadInclude('', 'appconf');

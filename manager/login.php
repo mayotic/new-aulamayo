@@ -42,6 +42,6 @@ Tools::loadTemplatePart('menu-login');
       ?>
   </body>
   <script type="text/javascript">
-    window.url_home = '<?=$conf['appinfo']['url_home']?>';
+    window.url_home = '<?=$conf['app']['url_home']?>';
   </script>
 </html>

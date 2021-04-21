@@ -252,11 +252,11 @@ class CursosModel {
             return false;
         }
 
-        $path = $conf['appinfo']['approot'] . 'public/uploads/certificados/certificado_' . $id_usuario . '_' . $id_curso . '.pdf';
+        $path = $conf['app']['approot'] . 'public/uploads/certificados/certificado_' . $id_usuario . '_' . $id_curso . '.pdf';
         if ($format == 'path') {
             $location = $path;
         } else {
-            $location = $conf['appinfo']['appfolder'] . 'public/uploads/certificados/certificado_' . $id_usuario . '_' . $id_curso . '.pdf';
+            $location = $conf['app']['folder'] . 'public/uploads/certificados/certificado_' . $id_usuario . '_' . $id_curso . '.pdf';
             ;
         }
 
@@ -302,7 +302,7 @@ class CursosModel {
          $pdf->SetTitle('Certificado del curso');
          $pdf->SetCreator('Ediciones Mayo S.A.');
          $pdf->SetAuthor('Ediciones Mayo S.A.');
-         $pdf->Image($conf['appinfo']['approot'] . 'public/uploads/certificados/backgrounds/' . $curso->plantilla_certificado, 0, 0, 0, 0);
+         $pdf->Image($conf['app']['approot'] . 'public/uploads/certificados/backgrounds/' . $curso->plantilla_certificado, 0, 0, 0, 0);
          $pdf->SetFont('Helvetica');
 
          $this->fpdfTextWriter($pdf,
@@ -334,7 +334,7 @@ class CursosModel {
 
          // Plana 2
          $pdf->AddPage('P', 'A4');
-         $pdf->Image($conf['appinfo']['approot'] . 'public/uploads/certificados/backgrounds/' . $curso->plantilla_certificado_2, 0, 0, 0, 0);
+         $pdf->Image($conf['app']['approot'] . 'public/uploads/certificados/backgrounds/' . $curso->plantilla_certificado_2, 0, 0, 0, 0);
 
 
           $this->fpdfTextWriter($pdf,

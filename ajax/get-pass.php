@@ -7,7 +7,7 @@ if (!Tools::isAjax()) {
 }
 
 //Tools::showAllPhpErrors();
-Tools::loadTranslation($lang = $conf['appinfo']['default_lang']);
+Tools::loadTranslation($lang = $conf['app']['default_lang']);
 
 if ($email = Tools::request('email')) {
 

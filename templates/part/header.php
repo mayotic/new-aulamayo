@@ -77,7 +77,7 @@ $tdata['pagetitle'] = ucfirst(AutoIncludes::getFileName(true));
   <body id="page-top <?php echo AutoIncludes::getFileName(true); ?>">
 
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo-class" style="background-image: url(<?php echo Tools::loadImage('png', 'logo-am');?>)" href="<?=$conf['appinfo']['url_home']?>">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo-class" style="background-image: url(<?php echo Tools::loadImage('png', 'logo-am');?>)" href="<?=$conf['app']['url_home']?>">
       <!-- <header class="container" style="background-image: url(<?php echo Tools::loadImage('png', 'logo-am');?>)"> </header> -->
     </a>
     <button id="toggle-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">

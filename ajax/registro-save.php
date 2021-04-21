@@ -6,7 +6,7 @@ if (!Tools::isAjax()) {
   die('Acceso no permitido');
 }
 
-Tools::loadTranslation($lang = $conf['appinfo']['default_lang']);
+Tools::loadTranslation($lang = $conf['app']['default_lang']);
 
 /*
 if (!Tools::post('nombre') && !Tools::post('apellidos') && !Tools::post('email') && !Tools::post('consulta')) {

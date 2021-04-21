@@ -7,7 +7,7 @@ if (!Tools::isAjax()) {
 }
 
 //Tools::showAllPhpErrors();
-Tools::loadTranslation($lang = $conf['appinfo']['default_lang']);
+Tools::loadTranslation($lang = $conf['app']['default_lang']);
 
 //echo "<pre>"; var_dump($_POST); echo "</pre>"; exit();
 if (Tools::post('idcurso')) {

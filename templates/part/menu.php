@@ -10,7 +10,7 @@ $user = new User($_SESSION['userlogedin']);
 // Hooks
 Tools::includeHook('', 'menu');
 
-$logout_button = (AutoIncludes::getCurrentPage() !== $conf['appinfo']['url_login']) ? '<button id="logout" class="btn btn-sm btn-primary btn-block" type="submit">Salir</button>' : '';
+$logout_button = (AutoIncludes::getCurrentPage() !== $conf['app']['url_login']) ? '<button id="logout" class="btn btn-sm btn-primary btn-block" type="submit">Salir</button>' : '';
 
 // Make a menu bar
 $row_template = '<li class="nav-item {{pagename}}">

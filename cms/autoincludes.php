@@ -36,11 +36,11 @@ class AutoIncludes {
   }
   public static function getAppRootPath () {
     global $conf;
-    return $_SERVER['DOCUMENT_ROOT'] . $conf['appinfo']['appfolder'];
+    return $_SERVER['DOCUMENT_ROOT'] . $conf['app']['folder'];
   }
   public static function getAppRootUrl () {
     global $conf;
-    return self::getHttpRoot() . $conf['appinfo']['appfolder'];
+    return self::getHttpRoot() . $conf['app']['folder'];
   }
   public static function getHttpFolder () {
     global $conf;
@@ -54,7 +54,7 @@ class AutoIncludes {
       unset($uripath[count($uripath) - 1]);
     }
 
-    $sitepath = explode('/', $conf['appinfo']['appfolder']);
+    $sitepath = explode('/', $conf['app']['folder']);
 
     foreach ($uripath as $key => $value) {
       if (in_array($value, $sitepath)) {
@@ -67,7 +67,7 @@ class AutoIncludes {
 
   public static function loadResource ($type, $is_include = false, $follow_tree = true) {
     global $conf;
-    $resfolder = $conf['appinfo']['resfolder'] . '/' . $type;
+    $resfolder = $conf['app']['resources'] . '/' . $type;
     $folder = ($follow_tree ? '/' . self::getHttpFolder() : '');
     $fullfilePath = $resfolder . (($folder != '/' and $folder != '') ? $folder : '') . '/' . self::getFileName(true, $is_include) . '.' . $type;
 
@@ -99,13 +99,16 @@ class AutoIncludes {
   }
 
   public static function loadController ($is_include = false) {
-    global $conf;
-    $contfolder = $conf['appinfo']['contfolder'];
+    global $conf, $tdata;
+    $contfolder = $conf['app']['controllers'];
     $filename = self::getFileName(true, $is_include);
-    $folder = self::getHttpFolder($_SERVER['REQUEST_URI']);
+    // $folder = self::getHttpFolder($_SERVER['REQUEST_URI']);
+    $folder = ( $is_include ? implode('/', array_diff(explode('/', $is_include), explode('/', $_SERVER['DOCUMENT_ROOT']))) : self::getHttpFolder($_SERVER['REQUEST_URI']) );
+
     $fullfilePath = $contfolder . ($folder !== '' ? '/' : '') . $folder . '/' . self::getFileName(true, $is_include) . '.controller.php';
-    if (file_exists(self::getRootPath() . $fullfilePath)) {
-      include self::getRootPath() . $fullfilePath;
+
+    if (file_exists($conf['app']['root'] . $fullfilePath)) {
+      include $conf['app']['root'] . $fullfilePath;
     }
     return '';
   }

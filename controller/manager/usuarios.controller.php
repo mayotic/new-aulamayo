@@ -36,14 +36,14 @@ $grid   = [
           'search_columns'    =>  ['id_tipo_usuario, nombre, apellido_1, apellido_2, email'],
           'row_buttons'       =>  $row_buttons,
 
-          'before_insert'     =>  ['App::usuariosBeforeInsert', $conf['appinfo']['approot'] . '/include/app.php'],
+          'before_insert'     =>  ['App::usuariosBeforeInsert', $conf['app']['approot'] . '/include/app.php'],
           'before_update'     =>  ['App::usuariosBeforeUpdate',  $_SERVER['DOCUMENT_ROOT'] . '/include/app.php'],
 
-          'before_create'     =>  ['App::usuariosBeforeShowCreateDialog', $conf['appinfo']['approot'] . '/include/app.php'],
+          'before_create'     =>  ['App::usuariosBeforeShowCreateDialog', $conf['app']['approot'] . '/include/app.php'],
 
           'order_by'          =>  ['apellido_1', 'asc'],
-          'row_actions'       =>  [['activar', 'App::toggleUsuario', $conf['appinfo']['approot'] . '/include/app.php'],
-                                   ['desactivar', 'App::toggleUsuario', $conf['appinfo']['approot'] . '/include/app.php']],
+          'row_actions'       =>  [['activar', 'App::toggleUsuario', $conf['app']['approot'] . '/include/app.php'],
+                                   ['desactivar', 'App::toggleUsuario', $conf['app']['approot'] . '/include/app.php']],
           'row_buttons'       =>  [['#',
                                     'Activar',
                                     'fas fa-toggle-off',
@@ -238,7 +238,7 @@ $fields = [
                               'set_attr'         =>  ['details_row' => 'form-group col-md-12', 'details_field_cell' => 'col-sm-6'],
                               'tab'              =>  'Ficha del usuario',
                               'before_update'    =>  [''],
-                              'field_callback'   =>  ['App::passDecrypt', $conf['appinfo']['approot'] . '/include/app.php' ]
+                              'field_callback'   =>  ['App::passDecrypt', $conf['app']['approot'] . '/include/app.php' ]
                             ],
   'activo'              =>  [ 'label'            =>  'Activo',
                               'columns'          =>  true,
@@ -272,7 +272,7 @@ $fields = [
                                                                          ],
                                                  // 'row_actions'       =>  [
                                                  //                            ['certificado', 'App::getCertificadoController',
-                                                 //                            $conf['appinfo']['approot'] . '/include/app.php'
+                                                 //                            $conf['app']['approot'] . '/include/app.php'
                                                  //                            ]
                                                  //                         ],
                                                  'hide_'
@@ -306,7 +306,7 @@ $fields = [
                                                'vars'              =>  ['hide_edit_buttons_text' => true],
                                                // 'row_actions'       =>  [
                                                //                            ['certificado', 'App::getCertificadoController',
-                                               //                            $conf['appinfo']['approot'] . '/include/app.php'
+                                               //                            $conf['app']['approot'] . '/include/app.php'
                                                //                            ]
                                                //                         ],
                                                'hide_'

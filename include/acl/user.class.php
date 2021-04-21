@@ -1,13 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/include/dba/meedo.class.php';
-if (!defined('_HOST')) {
-  define('_DA', 1);
-  $conf = include_once $_SERVER['DOCUMENT_ROOT'] . '/cms/config.php';
-  define('_HOST', $conf['db']['host']);
-  define('_USER', $conf['db']['user']);
-  define('_PASS', $conf['db']['pass']);
-  define('_DB', $conf['db']['database']);
-}
+
 /**
  * A bogus class representing a user.
  * All methods listed here pertain to and only to the access control system
@@ -21,6 +13,10 @@ class User {
     public $tipo_usuario;
     protected $dba;
     protected $md;
+    public $users_table;
+    public $userid_field;
+    public $useremail_field;
+    public $field_name;
 
     /**
      * An id => name array of permissions currently granted to the user
@@ -28,25 +24,37 @@ class User {
     public $permissions;
 
     public function __construct( $user ) {
-        $this->dba = new Medoo([
-                            'database_type'  => 'mysql',
-                            'database_name'  => _DB,
-                            'server'         => _HOST,
-                            'username'       => _USER,
-                            'password'       => _PASS,
-                            'charset' => 'utf8',
-                            'collation' => 'utf8_general_ci',
-                          ]);
+
+        // Editable values. Make this values match with the ones of users table.
+        $this->user_table = 'usuarios';
+        $this->userid_field = 'id_usuario';
+        $this->usersname_field = 'nombre';
+        $this->usersurname_field = 'apellido_1';
+        $this->usersurname2_field = 'apellido_2';
+        $this->useremail_field = 'email';
+        // End of editable values
+
+        $config = [
+          'driver'	    => 'mysql',
+          'host'		    => _HOST,
+          'database'	  => _DB,
+          'username'	  => _USER,
+          'password'	  => _PASS,
+          'charset'	    => 'utf8',
+          'collation'	  => 'utf8_general_ci',
+          'prefix'	    => ''
+        ];
+        $this->dbx = new \Buki\Pdox($config);
 
         if ( ( is_int( $user ) || ctype_digit( $user ) ) && $user > 0 ) {
-            if ( $userinfo = $this->dba
-                        ->query( "SELECT * FROM usuarios WHERE id_usuario = $user")
-                        ->fetch( ) ) {
+            if ( $userinfo = $this->dbx
+                                  ->query( "SELECT * FROM " . $this->user_table. " WHERE " . $this->userid_field . " = $user")
+                                  ->fetch('array') ) {
                 $this->id = $user;
-                $this->nombre = $userinfo['nombre'];
-                $this->apellido_1 = $userinfo['apellido_1'];
-                $this->apellido_2 = $userinfo['apellido_2'];
-                $this->email = $userinfo['email'];
+                $this->nombre = $userinfo[$this->usersname_field];
+                $this->apellido_1 = $userinfo[$this->usersurname_field];
+                $this->apellido_2 = $userinfo[$this->usersurname2_field];
+                $this->email = $userinfo[$this->useremail_field];
                 $this->tipo_usuario = $userinfo['id_tipo_usuario'];
                 $this->_userinfo = $userinfo;
             }
@@ -124,7 +132,7 @@ class User {
      * @return bool true on success, false on failure
      */
     public function fetchPerms() {
-        $this->permissions = $this->dba->pdo
+        $this->permissions = $this->dbx->pdo
                         ->query( "SELECT users_permissions.permission_id, permissions.permission_name
                                     FROM permissions, users_permissions
                                     WHERE users_permissions.user_id = {$this->id}

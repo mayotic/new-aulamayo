@@ -2,7 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . '/cms/core.php';
 global $appconf, $tdata, $_l;
 
-Tools::loadTranslation($lang = $conf['appinfo']['default_lang']);
+Tools::loadTranslation($lang = $conf['app']['default_lang']);
 
 $canal =  $_l['todos_los_cursos'];
 if(isset($_GET['canal'])){

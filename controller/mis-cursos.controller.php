@@ -2,7 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . '/cms/core.php';
 global $appconf, $tdata, $_l;
 
-Tools::loadTranslation($lang = $conf['appinfo']['default_lang']);
+Tools::loadTranslation($lang = $conf['app']['default_lang']);
 
 if(!isset($_SESSION['userlogedin']) && !$_SESSION['userlogedin'] ) {
     header('Location: /home');

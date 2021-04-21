@@ -1,5 +1,4 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/cms/core.php';
 
 class Auth {
   public $dbx;
@@ -8,10 +7,13 @@ class Auth {
   public $useremail_field;
   public $userpass_field;
   public function __construct() {
+
+    // Editable values. Make this values match with the ones of users table.
     $this->userid_field = 'id_usuario';
     $this->users_table = 'usuarios';
     $this->useremail_field = 'email';
     $this->userpass_field = 'pass';
+    // End of editable values
 
     $config = [
       'driver'	    => 'mysql',
@@ -26,10 +28,13 @@ class Auth {
     $this->dbx = new \Buki\Pdox($config);
   }
   public function checkLoginAndRedirect($url = false, $url_notrights = false) {
-      // If not auhtenticaded session go to $conf['appinfo']['url_notrights'] else $conf['appinfo']['url_home']
+      // If not auhtenticaded session go to $conf['app']['url_notrights'] else $conf['app']['url_home']
       global $conf;
       if (!self::checkLogin()) {
-        Tools::redirect(($url_notrights ? $url_notrights : $conf['appinfo']['url_notrights']));
+        if (in_array('manager', explode('/', $_SERVER['REQUEST_URI']))) {
+          Tools::redirect(($url_notrights ? $url_notrights : $conf['app']['folder'] . $conf['back']['url_notrights']));
+        }
+        Tools::redirect(($url_notrights ? $url_notrights : $conf['app']['folder'] . $conf['app']['url_notrights']));
       }
       if ($url){
         Tools::redirect($url);
@@ -40,9 +45,8 @@ class Auth {
   public function checkLogin() {
       if (empty($_SESSION['userlogedin'])) {
         return false;
-      }else{
-        return true;
       }
+      return true;
   }
 
   public function logedIn() {
@@ -50,8 +54,7 @@ class Auth {
   }
 
   public function logout() {
-    //$_SESSION['userlogedin'] = false;
-    if (isset($_SESSION['userlogedin'])) {
+    if (!empty($_SESSION['userlogedin'])) {
         unset($_SESSION["userlogedin"]);
     }
     return true;
@@ -62,6 +65,7 @@ class Auth {
       $this->pass = isset($_POST['pass']) ? $_POST['pass'] : '';
 
       if (!$user_logedin = $this->isValidUser($this->email, Tools::myEncrypt($this->pass))) {
+      // if (!$user_logedin = $this->isValidUser($this->email, Tools::myEncryptMD5($this->pass))) {
           $_SESSION['userlogedin'] = false;
           return false;
       }

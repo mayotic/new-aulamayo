@@ -7,11 +7,6 @@
  * @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
  */
-html,
-body,
-#menu {
-  height: 100%;
-}
 
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -71,9 +66,8 @@ h1 {
 
 h2 {
 	font-size: 30px;
-	/* padding-left: 20px; */
+	padding-left: 20px;
 	margin-bottom: 14px;
-  font-weight: bold;
 }
 
 .rtl h2 {
@@ -108,7 +102,7 @@ td table {
 }
 
 table {
-	margin: 1em 20px 25px 0;
+	margin: 1em 20px 0 0;
 	border-collapse: collapse;
 	font-size: inherit;
 }
@@ -138,9 +132,8 @@ thead th {
 thead td,
 thead th {
 	background: aliceblue;
-	/* border-bottom: 2px solid #ddd; */
+	border-bottom: 2px solid #ddd;
 	font-weight: bold;
-  height: 30px;
 }
 
 table select {
@@ -207,18 +200,15 @@ legend {
 	border-radius: 3px 3px 0 0;
 	width: 100%;
 	margin: 0 -16px;
-  transition: width 2s;
-  font-weight: 600;
 }
 
 fieldset input,
 fieldset select {
 	margin-right: 5px;
-      margin-bottom: 10px;
 }
 
 fieldset div input:last-child {
-	margin-right: 7px;
+	margin-right: 0;
 }
 
 p, .rtl p {
@@ -317,31 +307,13 @@ input[type=submit],
 .links a {
 	cursor: pointer;
 	box-shadow: none;
-  background-color: #337ab7;
-  color: #fff;
-  font-weight: 600;
-}
-
-.links a:before {
-    margin-right: 8px !important;
-}
-
-.links a.active:before,
-.links a:hover:before {
-    color: #fff !important;
-}
-
-.links a.active,
-.links a:hover {
-  color: #fff !important;
-  font-weight: 600 !important;
 }
 
 input[type=submit]:hover,
 .links a:hover,
 .links a.active {
-	background: #3b8dd4 !important;
-	border-color: #3b8dd4;
+	background: #f0f0f0;
+	border-color: #adadad;
 }
 
 input[type=submit]:focus,
@@ -355,11 +327,7 @@ input[type=submit]:active,
 .links a.active {
 	background-image: none;
 	outline: 0;
-	/* box-shadow: inset 0 3px 5px rgba(0, 0, 0, .08); */
-}
-
-input[type="checkbox"] {
-  margin-right: 7px;
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, .08);
 }
 
 #login-form input[type=submit],
@@ -444,9 +412,9 @@ input.wayoff {
 
 .js .column {
 	background: #fff;
-	padding: 4px;
-	margin: -36px 0 0 12px;
-	/* border: 1px solid #66afe9; */
+	padding: 0;
+	margin: -36px 0 0 -62px;
+	border: 1px solid #66afe9;
 	border-radius: 2px;
 	z-index: 10
 }
@@ -469,7 +437,7 @@ input.wayoff {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	width: 30px;
-	height: 26px;
+	height: 30px;
 	line-height: 30px;
 	font-size: 14px;
 	text-align: center;
@@ -656,7 +624,7 @@ p.nowrap {
 	color: inherit;
 	vertical-align: middle;
 	display: inline-block;
-  background-color: #f0f0f0;
+  background-color: #E3ECF4;
 }
 
 .rtl .links a {
@@ -707,14 +675,13 @@ p.nowrap {
 }
 
 #menu {
-	position: fixed;
+	position: absolute;
 	margin: 10px 0 0;
 	padding: 0 0 30px 0;
-	top: 165px;
+	top: 210px;
 	left: 0;
 	width: 266px;
-  height: calc(100% - 246px);
-	/* overflow: auto !important; */
+	overflow: auto !important;
 	/*background: red;*/
 	/*position: fixed;*/
 	/*overflow: scroll;*/
@@ -722,18 +689,18 @@ p.nowrap {
 }
 
 #menu h1 {
-  background: #fff;
-  position: fixed;
-  top: 0px;
-  left: 0;
-  z-index: 710;
-  margin: 0;
-  width: 246px;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  padding: 2px 10px 14px;
-  height: 28px;
-  text-align: center;
+	background: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 710;
+	margin: 0;
+	width: 246px;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 2px 10px 14px;
+	height: 28px;
+	text-align: center;
 }
 
 .rtl #menu h1 {
@@ -749,8 +716,6 @@ p.nowrap {
 	padding: 0;
 	margin: 0;
 	border-bottom: 0;
-  z-index: 1000;
-      box-shadow: 3px 0px 3px #ccc;
 }
 
 #menu .message {
@@ -765,14 +730,14 @@ p.nowrap {
 
 #logins,
 #tables {
-	/* position: fixed; */
+	position: fixed;
 	top: 250px;
 	left: 0;
 	/*background: orange;*/
 	height: 100px;
 	width: 266px;
 	overflow: hidden !important;
-	/* border-right: 1px solid #ddd; */
+	border-right: 1px solid #ddd;
 	background: #fff;
 }
 
@@ -869,7 +834,7 @@ p.nowrap {
 	left: 0;
 	height: 40px;
 	width: 246px;
-	/* border-right: 1px solid #ddd; */
+	border-right: 1px solid #ddd;
 	padding: 10px !important;
 	font-size: 0;
 }
@@ -896,21 +861,17 @@ p.nowrap {
 
 #menu .links {
 	width: 246px;
-	/* border-right: 1px solid #ddd; */
+	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	background: #f5f5f5;
 	/*background: transparent;
 	background: blue;*/
 	position: fixed;
-	top: 104px;
+	top: 105px;
 	left: 0;
-	padding: 15px 10px 10px !important;
+	padding: 0 10px 10px !important;
 	/*height: 60px;*/
 	z-index: 700;
-  box-shadow: 3px 0px 3px #ccc;
-}
-#menu .jsonly {
-  padding: 33px 10px 10px 10px;
 }
 
 .rtl #menu .links {
@@ -921,18 +882,17 @@ p.nowrap {
 }
 
 #menu .links a {
-	padding: 5px 0;
+	padding: 1px 0;
 	font-size: 12px;
-	width: 47%;
+	width: 100%;
 	margin-bottom: 5px;
 	font-weight: normal;
 	line-height: 1.42857143;
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: middle;
-	/* display: inline-block; */
+	display: inline-block;
   background-color: #fff;
-  float: left;
 }
 
 #logins,
@@ -950,10 +910,10 @@ p.nowrap {
 #content {
 	/* margin: 28px 0 0 294px;
 	padding: 10px 20px 20px 0; */
-	margin: 68px 0 0 295px;
+	margin: 28px 0 0 266px;
 	padding: 10px 20px 40px 20px;
 	/*background: #00f;*/
-	/* border-left: 1px solid #ddd; */
+	border-left: 1px solid #ddd;
 }
 
 .rtl #content {
@@ -966,7 +926,7 @@ p.nowrap {
 #lang {
 	position: fixed;
 	top: 4px;
-	left: 84%;
+	left: auto;
 	right: 4px;
 	line-height: 1.8em;
 	padding: .3em 1em;
@@ -980,27 +940,20 @@ p.nowrap {
 }
 
 #breadcrumb {
-  white-space: nowrap;
-      position: fixed;
-      top: 0;
-      left: 285px;
-      background: #f5f5f5;
-      border-bottom: 1px solid #ddd;
-      height: 28px;
-      line-height: 1.8em;
-      margin: 0 0 0 -18px;
-      padding: 8px 15px 8px 306px;
-      width: 100%;
-      z-index: 700;
-      box-shadow: 0px 2px 3px #ccc;
+	white-space: nowrap;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: #f5f5f5;
+	border-bottom: 1px solid #ddd;
+	height: 28px;
+	line-height: 1.8em;
+	margin: 0 0 0 -18px;
+	padding: 8px 15px 8px 306px;
+	width: 100%;
+	z-index: 700;
 }
-#breadcrumb a:first-child {
-  margin-left: -265px;
-}
-#breadcrumb a:nth-child(3) {
-  font-size: 25px;
-  font-weight: bold;
-}
+
 .rtl #breadcrumb {
 	left: auto;
 	right: 0;
@@ -1600,5 +1553,5 @@ a.jush-custom:visited {
 }
 #tables {
   height: 100%;
-	/* overflow: auto !important; */
+	overflow: auto !important;
 }

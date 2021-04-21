@@ -6,7 +6,7 @@ if(isset($_SESSION['userlogedin']) && $_SESSION['userlogedin'] ){
     header('Location: /home');
 }
 
-Tools::loadTranslation($lang = $conf['appinfo']['default_lang']);
+Tools::loadTranslation($lang = $conf['app']['default_lang']);
 
 $textos = new TextoslegalesModel();
 $tdata['textos'] = $textos->getTextoslegales(['filter' => ['id_tipo_texto_legal' => 3]]);

@@ -1,16 +1,20 @@
 <?php
-Tools::loadInclude('httpclient', 'Requests');
+// Tools::loadInclude('httpclient', 'Requests');
+//
+// // Requests::register_autoloader();
+//
+// $token = 'bearer NFth5L5Sh2XJpPbloCfOpER3J.uJ2b97.t-cFQqSwO7L-zrAnP0t3kk23SX8aZ69.3PYbRBuCXLuAbVEeMUvCklm68iXOrapZpOzobaN0ph8paEnXszBqHxL.3s6x-HG';
+// $end_point = 'https://api.surveymonkey.net/v3/surveys';
+// $data = ['title' => 'Remote creted survey'];
+// $header = ['Content-Type' => 'application/json','Authorization' => $token];
+// $response = Requests::post($end_point, $header, json_encode($data));
+//
+// var_dump($response->body);
 
-// Requests::register_autoloader();
+// $destination_email, $subject, $body, $email_from_text = '', $email_reply_text = '', $email_copy_text = '', $email_copy2_text = ''
 
-$token = 'bearer NFth5L5Sh2XJpPbloCfOpER3J.uJ2b97.t-cFQqSwO7L-zrAnP0t3kk23SX8aZ69.3PYbRBuCXLuAbVEeMUvCklm68iXOrapZpOzobaN0ph8paEnXszBqHxL.3s6x-HG';
-$end_point = 'https://api.surveymonkey.net/v3/surveys';
-$data = ['title' => 'Remote creted survey'];
-$header = ['Content-Type' => 'application/json','Authorization' => $token];
-$response = Requests::post($end_point, $header, json_encode($data));
 
-var_dump($response->body);
-
+echo Tools::sendMail('jvilanova@edicionesmayo.es', 'Mail de prova amb copte de Google', 'Mail de prova utilitzant un compte extern a google amb l SMTP de google i compte de Google');
 
 //
 // $curl = curl_init();

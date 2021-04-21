@@ -49,6 +49,8 @@ function adminer_object()
 		new AdminerDumpJson,
 		new AdminerDumpPhpPrototype,
 		new AdminerTablesFilter,
+		// new AdminerLoginServers(array($description => array("server" => 'dev.endocrinoacademy.es', "driver" => "mysql"))),
+		// new AdminerJush
 	];
 
 

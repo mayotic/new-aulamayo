@@ -43,6 +43,6 @@ $tdata['pagetitle'] = ucfirst(AutoIncludes::getFileName(true));
     ?>
   </head>
   <body class="<?php echo AutoIncludes::getFileName(true); ?>">
-    <a href="<?=$conf['appinfo']['url_home']?>">
+    <a href="<?=$conf['app']['url_home']?>">
         <header class="container" style="background-image: url(<?php echo Tools::loadImage('png', 'logo-foro-img');?>), url(<?php echo Tools::loadImage('png', 'logo-foro-text');?>)"> </header>
     </a>

@@ -6,7 +6,7 @@ global $conf, $appconf, $tdata;
 
 Tools::showAllPhpErrors();
 
-require_once $conf['appinfo']['approot'] . '/include/dompdf/autoload.inc.php';
+require_once $conf['app']['approot'] . '/include/dompdf/autoload.inc.php';
 
 use Dompdf\Dompdf;
 

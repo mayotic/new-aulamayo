@@ -1,5 +1,5 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
+if ( session_status() == PHP_SESSION_NONE and (empty($start_sessions) and $start_sessions !== false)) {
   session_start();
 }
 
@@ -8,8 +8,10 @@ if (!defined('_DA')) {
   define('_DA', 1);
 }
 
-// Load site config
+// Load site configs
 $conf = include 'config.php';
+$appconf = include $conf['app']['root'] . '/include/appconf.php';
+$tdata = [];
 
 // Set session environment
 $_SESSION['env'] = $conf['env'];
@@ -35,38 +37,33 @@ if (!defined('_HOST')) {
   define('_DB', $conf['db']['database']);
 }
 
-// spl_autoload_register( function( $classname ) {
-//     include_once $classname . '.php';
-// } );
-
 // Include app constants
-include $conf['appinfo']['approot'] . '/include/appcons.php';
+include_once $conf['app']['root'] . '/include/appcons.php';
 
 // Include the basics
 include_once 'autoincludes.php';
-include_once $conf['appinfo']['approot'] . '/include/tools.php';
-// Meedo
-include_once $conf['appinfo']['approot'] . '/include/dba/meedo.class.php';
+include_once $conf['app']['root'] . '/include/tools.php';
+
 // Pdox
-include_once $conf['appinfo']['approot'] . '/include/pdox/Cache.php';
-include_once $conf['appinfo']['approot'] . '/include/pdox/PdoxInterface.php';
-include_once $conf['appinfo']['approot'] . '/include/pdox/Pdox.php';
+// include_once $conf['app']['root'] . '/include/pdox/Cache.php';
+include_once $conf['app']['root'] . '/include/pdox/PdoxInterface.php';
+include_once $conf['app']['root'] . '/include/pdox/Pdox.php';
 // Auth library
-include_once $conf['appinfo']['approot'] . '/include/auth/auth.class.php';
+include_once $conf['app']['root'] . '/include/auth/auth.class.php';
 // Users and rights library
-include_once $conf['appinfo']['approot'] . '/include/acl/user.class.php';
+include_once $conf['app']['root'] . '/include/acl/user.class.php';
 // App code
-include_once $conf['appinfo']['approot'] . '/include/app.php';
+include_once $conf['app']['root'] . '/include/app.php';
 
 spl_autoload_register(function ($class_name) {
   global $conf;
 
   if (strpos($class_name, 'Requests_') === 0) { // Starts with Request_ (autoload httpclient classes)
     $file = str_replace('_', '/', $class_name);
-    if (file_exists($conf['appinfo']['approot'] . 'include/httpclient/' . $file . '.php')) {
-      require_once $conf['appinfo']['approot'] . 'include/httpclient/' . $file . '.php';
+    if (file_exists($conf['app']['root'] . '/include/httpclient/' . $file . '.php')) {
+      require_once $conf['app']['root'] . '/include/httpclient/' . $file . '.php';
     }
   }elseif(strpos($class_name, 'Model', strlen($class_name) - strlen('Model')) !== false){ // Ends with Model (autoload Models classes)
-    include_once $conf['appinfo']['approot'] . '/model/' . strtolower(str_replace('Model', '',$class_name)) . '.model.php';
+    include_once $conf['app']['root'] . '/model/' . strtolower(str_replace('Model', '',$class_name)) . '.model.php';
   }
 });
