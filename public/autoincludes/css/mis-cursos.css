@@ -1,0 +1,88 @@
+
+.view{
+    height: 18px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.marginB20{
+    margin-bottom: 20px !important;
+}
+
+.marginB30{
+    margin-bottom: 30px !important;
+}
+
+.gridcursos .counter-title {
+    margin-top: 12px;
+    font-weight: bold;
+}
+.gridcursos .puntos {
+    letter-spacing: 1px;
+    background: -webkit-linear-gradient(left , #7baf32, #45799e);
+    background: linear-gradient(to right, #7baf32, #45799e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    float: left
+}
+.gridcursos .puntos img {
+    margin-right: 10px;
+    margin-top: -4px;
+}
+.gridcursos {
+    padding-bottom: 5px;
+}
+
+
+.rowcursos img.imgbook2 {
+  max-width: 272px !important;
+}
+.imgbook2{
+	width:250px;
+	height:auto;
+	float:left;
+	margin-right:10px;
+}
+
+
+@media (max-width: 550px){
+    .rowcursos img.imgbook2 {
+        max-width: none!important;
+        /*width: 100%!important;*/
+        width: 420px !important;
+    }
+}
+
+
+@media (max-width: 768px){
+    .imgbook2 {
+        width: 200px;
+        padding: 10px;
+        margin: auto;
+    }
+}
+
+@media (max-width: 800px){
+    .gridcursos .puntos {
+        margin-top: 5px;
+    }
+    
+    .mispremios .imgbook2{
+        width: 100%;
+    }
+        
+}
+
+@media (max-width: 1000px){
+    .gridcursos .puntos{
+            margin-top: 15px;
+    }
+}
+
+
+
+
+

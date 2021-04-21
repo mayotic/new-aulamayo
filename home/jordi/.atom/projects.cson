@@ -1,0 +1,44 @@
+[
+  {
+    title: "Foro Leo 2019 - dev"
+    paths: [
+      "/home/jordi/Documents/emayo/leo/foro-leo2019-dev"
+    ]
+  }
+  {
+    title: "Personalfactory"
+    paths: [
+      "/home/jordi/Documents/projectes/newpersonalfactory"
+    ]
+  }
+  {
+    title: "Web BCC Leo"
+    paths: [
+      "/home/jordi/Documents/emayo/leo/BCCLeo/web"
+    ]
+  }
+  {
+    title: "Web Becas Tinzaparina"
+    paths: [
+      "/home/jordi/Documents/emayo/leo/becastinzaparina/web"
+    ]
+  }
+  {
+    title: "Formulari Leti 2019"
+    paths: [
+      "/home/jordi/Documents/emayo/leti/eventic2019"
+    ]
+  }
+  {
+    title: "Foro Leo 2019"
+    paths: [
+      "/home/jordi/Documents/emayo/leo/foro-leo2019"
+    ]
+  }
+  {
+    title: "Centros de referencia - Ulises"
+    paths: [
+      "/home/jordi/Documents/emayo/centros-referencia/ulises"
+    ]
+  }
+]

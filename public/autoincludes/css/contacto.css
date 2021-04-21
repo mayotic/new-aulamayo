@@ -1,0 +1,11 @@
+
+
+#contact-form textArea{
+    padding:5px 5px 5px 8px;
+    color: #6c757d;
+}
+
+.btn.disabled, .btn:disabled{
+    color: #DDD !important;
+    opacity: 0.25 !important;
+}

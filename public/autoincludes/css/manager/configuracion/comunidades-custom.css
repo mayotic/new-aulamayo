@@ -1,0 +1,16 @@
+#comunidades-list > table > tbody > tr > td > a {
+  color: #199BB0;
+}
+#comunidades-list > table > thead > tr > th > a {
+  color: #212529;
+}
+#comunidades-list > table tr > th:first-child {
+  color: #bbb !important;
+}
+.page-link {
+  color: #199BB0;
+}
+.page-item.active .page-link {
+  background-color: #199BB0;
+  border-color: #199BB0;
+}

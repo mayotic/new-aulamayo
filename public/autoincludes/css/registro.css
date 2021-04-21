@@ -1,0 +1,25 @@
+
+#registro-form select{
+    /*width: 100%;*/
+    width: 387px !important;
+    /*width: auto !important;*/
+}
+
+/* iPads (portrait and landscape) ----------- */  
+@media only screen  
+and (min-width : 768px)  
+and (max-width : 1024px) {  
+    #registro-form select{
+        /*width: 200px !important;*/
+    }
+} 
+
+/* iPads (landscape) ----------- */  
+@media only screen  
+and (min-width : 768px)  
+and (max-width : 1024px)  
+and (orientation : landscape) {  
+    #registro-form select{
+        width: 310px !important;
+    }
+}  

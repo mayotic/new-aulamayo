@@ -1,0 +1,37 @@
+RewriteEngine On
+
+# MAINTENANCE-PAGE REDIRECT
+# ErrorDocument 503 /enactualizacion.php
+# RewriteCond %{REMOTE_ADDR} !=213.27.229.150
+# RewriteCond %{ENV:REDIRECT_STATUS} !=503
+# RewriteRule .* - [R=503,L]
+
+# RewriteEngine On
+
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^/?cursos/(.*?)/?$ /cursos.php?canal=$1 [L]
+# RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /cursos\.php\?canal=([^\&\ ]+)
+# RewriteRule ^/?cursos\.php$ /cursos/%1? [L,R=301]
+
+# RewriteRule ^cursos\/([^\/]+)\/([^\/]+)\/([^\/]+)\/? /cursos.php?var1=$1&var2=$2&var3=$3 [L]
+# RewriteRule ^cursos\/([^\/]+)\/([^\/]+)\/?  /cursos.php?var1=$1&var2=$2 [L]
+# RewriteRule ^cursos\/([^\/]+)\/?  /cursos.php?canal=$1 [L]
+
+# RewriteRule ^index/([^/]+)/([^/]+).php /page.php?search=$1&sort=$2 [NC]
+# RewriteRule ^cursos/([^/]+) /cursos.php?canal=$1 [NC]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#RewriteRule ^/?cursos/(.*?)/?$ /cursos.php?canal=$1 [L]
+RewriteRule (.*cursos)/(.*)$ cursos.php?canal=$2 [L]
+#RewriteRule ^/?cursos/(.*?)/(.*?)/?$ /ficha-curso.php?curso=$2 [L]
+RewriteRule (.*ficha-curso)/(.*)$ ficha-curso.php?curso=$2 [L]
+
+
+RewriteBase /
+Options All -Indexes -MultiViews
+RewriteCond %{DOCUMENT_ROOT}/$1\.php -f [NC]
+RewriteRule ^(.+?)/?$ $1.php [L]

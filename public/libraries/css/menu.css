@@ -1,0 +1,15 @@
+.main {
+  background-color: #f0f2f4!important;
+}
+#navbarSupportedContent li.nav-item.active {
+  background-color: #17a2b8;
+  color: #fff;
+  border-radius: 5px;
+}
+#navbarSupportedContent li.nav-item.active > a {
+  color: #fff;
+}
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #17a2b8;
+}

@@ -1,0 +1,20 @@
+header {
+    /* background-image: url(/public/img/banner_foro_leo_2019.jpg), url(/public/img/banner_foro_leo_2019.jpg); */
+    background-position: 100pt center, 79% center;
+    background-repeat: no-repeat, no-repeat;
+    /* background-image: url(/public/img/banner_foro_leo_2019.jpg); */
+    /* background-size: 29%; */
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    height: 193px;
+    background-color: #fff;
+
+}
+header, footer {
+   display: block;
+   margin: 0px;
+   padding: 5px;
+   /* min-height: 100px; */
+   /* border: 1px solid #f3f3f3; */
+   /* border-radius: 7pt; */
+ }

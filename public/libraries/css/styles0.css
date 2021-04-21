@@ -1,0 +1,668 @@
+* {
+	overflow-x: hidden;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+/* MENU */
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    box-shadow: 1px 1px 5px #000;
+    /*opacity: 0.9;*/
+}
+
+.navbar .nav-item .nav-link {
+  color: #165591;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.nav-link::after{
+    content: "|";
+    padding-left: 10px;
+    color: #165591;
+}
+
+a.nav__link{
+    text-decoration: none;
+    background-image: linear-gradient(#17a2b8, #17a2b8);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size .3s;
+}
+a.nav__link:hover, a.nav__link:focus {
+    background-size: 100% 4px;
+}
+a.nav__link > i {
+    display: inline-block;
+}
+
+.navbar-nav > li:last-child > a::after {
+    content:none;
+}
+
+.navbar .down_menu:after {
+    content: '';
+    display: inline-block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #FFF; /* change color here, modified for a black arrow */
+    position: absolute;
+    top: -6px;
+    left: 15px;
+}
+
+.btn_miscursos, .btn_miscursos a, .btn_miscursos hover{
+    color: #165591;
+    text-decoration: none !important;
+}
+
+.blue-background {background-color:#165591;}
+
+.blue-outline {border: 1px #165591 solid; color:#165591;}
+
+.blue-text, .blue-text a, .blue-text hover {color:#165591; }
+
+.w400{ font-weight: 400; }
+
+.w500{ font-weight: 500; }
+
+.grey-fort, grey-fort a, grey-fort hover {color:#6c757d;}
+
+.white {color:#ffffff;}
+
+.breadcrumb-text{ text-transform: uppercase; font-size: 14px;}
+
+.cursos a{
+    font-size: 12px;
+}
+
+strong{
+    font-weight: 500;
+}
+
+/* MENU USER */
+.acces{
+    background-color: #17a2b8;
+    border-radius: 0.5rem;
+    padding: .1rem .1rem;
+}
+.acces a{
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.edit-user{
+    font-size: 11px;
+    color: #DDD;
+}
+
+.ico_user{
+    font-size: 16px;
+}
+
+.sep-user{
+    text-align: center;
+    width:90%;
+    margin-top:2px;
+    margin-bottom:3px;
+}
+
+.circulo {
+    float: right;
+    width: 1.0rem;
+    height:1.0rem;
+    border-radius: 50%;
+    background: #17a2b8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin:0px auto;
+    padding:3%
+}
+
+.circulo > span {
+    font-family: sans-serif;
+    color: white;
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+.options-menu-user, .options-menu-user a{
+    color: #000;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 300;
+    border-radius: 0.5rem;
+    padding: .2rem .6rem;
+}
+
+.main-header {
+  /*position: relative;*/
+  /*background: url(/img/background-team3.jpg);*/
+  /*background: url(/public/img/aulamayo-1.jpg);*/
+  /*background: url(../img/background-team3.jpg) #004990 no-repeat fixed center;*/
+  /*background-size: cover;*/
+  /*min-height: 400px;*/
+}
+
+.background-overlay {
+  /*background: rgba(48, 51, 107,.7);*/
+  background:rgba(255,255,255, 0.8);
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 400px;
+}
+
+.icon-whyaulamayo img{
+    /*transition: all 300ms*/
+}
+
+.icon-whyaulamayo img:hover{
+    /*
+    cursor: pointer;
+    opacity: 0.8;
+    transform: scale(1.1, 1.1);
+    */
+}
+
+div.card-canal:hover{
+    cursor: pointer;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.card-canal a:link, div.card-canal a:visited, div.card-canal a:hover , div.card-canal a:active {
+    text-decoration: none;
+}
+
+div.card-canal a {
+    color: #165591;
+}
+
+.border-subfooterrightgrey{
+    border-right: 1px solid #DDD;
+}
+
+
+
+/* SEARCH CURSOS */
+.search-input{
+    max-width: 500px;
+    height:40px;
+}
+
+.btn-search-cursos{
+    background-color: #FFF;
+    color: grey;
+}
+
+.srbox{
+    /*
+    width:580px;
+    height:70px;
+    float:left;
+    margin-left:120px;
+    margin-top:4px;
+    */
+}
+.textbox{
+    border-radius: 8px 0px 0px 8px;
+    background-color:#fff;
+    float:left;
+    border:none;
+    height:40px;
+    padding:1px 12px;
+    font-size:15px;
+    line-height: 1.42857;
+    color:#000;
+    width:420px;
+    margin-top:13px;
+}
+.query-submit{
+    border-radius: 0px 8px 8px 0px;
+    cursor:pointer;
+    background:#fbfbfb;
+    width:45px;
+    padding:1px 6px;
+    float:left;
+    border:none;
+    /*margin-top:13px;*/
+    height:40px;
+    border: 1px solid #ced4da;
+}
+.textbox-clr{
+    cursor:pointer;
+    background:#fff;
+    width:20px;
+    height:40px;
+    float:left;
+    border:none;
+    text-align:center;
+}
+
+.font14{
+    font-size: 14px;
+}
+
+/***********************************/
+.live-outer{
+    width:100%;
+    height:40px;
+    border-bottom:1px solid #ccc;
+    background:#fff;
+}
+.live-outer:hover{
+    background:#F3F3F3;
+}
+.live-im{
+    float:left;
+    width:10%;
+    height:40px;
+}
+/*
+.live-im img{
+    width:100%;
+    height:100%;
+}
+*/
+.live-product-det{
+    float:left;
+    width:90%;
+    height:40px;
+}
+.live-product-name{
+    width:100%;
+    height:22px;
+    margin-top:4px;
+}
+.live-product-name p{
+    margin:0px;
+    color:#333;
+    text-shadow: 1px 1px 1px #DDDDDD;
+    font-size:17px;
+}
+.live-product-price{
+    width:100%;
+    height:25px;
+}
+.live-product-price-text{
+    float:left;
+    width:50%;
+}
+.live-product-price-text p{
+    margin:0px;
+    font-size:16px;
+}
+.link-p-colr{
+    color:#333;
+}
+/***********************************/
+#search-layer{
+    /*
+    position:absolute;
+    background:rgba(255,255,255,0.5);
+    z-index:9;
+    left:0px;
+    top:0px;
+    */
+}
+#livesearch{
+    width: 540px;
+    z-index:9999;
+    overflow:auto;
+    /*background:#17a2b8;*/
+    background:#FFF;
+    max-height:260px;
+    box-shadow:0px 2px 4px #444;
+    position: absolute;
+    top:42px;
+    /*
+    z-index:9999;
+    background:#0071b4;
+    max-height:260px;
+    overflow:auto;
+    /*width:92%;*/
+    /*
+    max-width: 500px;
+    box-shadow:0px 2px 4px #444;
+    margin-left:1.2%;
+    */
+}
+/* FIN SEARCH CURSOS */
+
+
+/* ACORDION BOTTSTRAP */
+.card-header{
+    cursor: pointer;
+}
+
+.accordion .card-header:after {
+    /*font-family: 'FontAwesome';*/
+    color:#165591;
+    font-weight: bold;
+    font-size: 28px;
+    /*content: "\f068";*/
+    content: "-";
+    float: right;
+}
+.accordion .card-header.collapsed:after {
+    /* symbol for "collapsed" panels */
+    /*content: "\f067";*/
+    content: "+";
+    color:#165591;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+
+/* CONTACTO */
+.btn-form-contact{
+    /*background-color: #FFF;*/
+    /*border-right: 0px;*/
+    font-size: 24px;
+    /*padding-left:  10px;*/
+    /*padding-right: 1px;*/
+
+}
+
+/* #contact-form input, #login-form input, #forgetpassword-form input, #registro-form input{ */
+/* #contact-form input, #forgetpassword-form input, #registro-form input{ */
+/*#forgetpassword-form input, #registro-form input{*/
+#forgetpassword-form input{
+    /*border-left: 0px;*/
+    border: 1px #DDD solid;
+    border-color: #DDD;
+    border-color: #DDD;
+    /*outline:none !important;*/
+    /*outline-width: 0 !important;*/
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+
+/* PODEMOS AYUDARTE */
+*{box-sizing:border-box;}
+/* Extra centrado vertical*/
+.social{
+    width:107px;
+    position:fixed;
+    /*top:50px;*/
+    right:-2px;
+
+    top:72%;
+    height:205px;
+    /*para poner height 192 deberíamos haber indicado en el reset de estilos font-size:0;*/
+    margin-top:-100px;
+    z-index: 999;
+}
+
+/* POPUP CANALES */
+*{box-sizing:border-box;}
+/* Extra centrado vertical*/
+.canales{
+    width:107px;
+    position:fixed;
+    /*top:50px;*/
+    left:-2px;
+
+    top:50%;
+    /*height:205px;*/
+    /*para poner height 192 deberíamos haber indicado en el reset de estilos font-size:0;*/
+    margin-top:-100px;
+    z-index: 999;
+}
+
+.canales2{
+    width:107px;
+    position:fixed;
+    left:-2px;
+    color:#FFF;
+    top:50%;
+    margin-top:-100px;
+    z-index: 999;
+    background-color: #17a2b8;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.canales2 ul{
+    padding: 10px;
+}
+
+.canales2 li {
+    list-style:none;
+    text-transform: uppercase;
+    font-size:12px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.canales2 a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+
+
+/*++++++++++++++++*/
+/*   TO THE TOP   */
+/*++++++++++++++++*/
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 34px; /* Place the button at the bottom of the page */
+  right: 34px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #00B0B6; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 0px; /* Some padding */
+  border-radius: 45px; /* Rounded corners */
+  font-size: 16px; /* Increase font size */
+  width: 40px;
+  height: 40px;
+  transition: 0.3s;
+  color:#FFF;
+
+}
+#myBtn .lnr{opacity: 0.8;}
+
+#myBtn:hover {
+  background-color: #00B0B6;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+#myBtn:hover .lnr{
+    top:-5px;
+    opacity: 1;
+}
+#myBtn:active{
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0.0);
+
+}
+
+/* FAQS */
+.cardtext{
+    color: #165591;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px !important;
+}
+
+
+/* SWEET ALERT */
+.swal2-confirm{
+  background-color: #17a2b8 !important;
+}
+
+
+/* COOKIES */
+#barraaceptacion {
+    display:none;
+    position:fixed;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    padding-bottom:10px;
+    width:100%;
+    text-align:center;
+    /*min-height:50px;*/
+    /*min-height:80px;*/
+    background-color: rgba(0, 0, 0, 0.7);
+    color:#fff;
+    /*z-index:99999;*/
+    z-index:9;
+}
+
+.inner {
+    /*width:100%;*/
+    /*position:absolute;*/
+    /*padding-left:5px;*/
+    padding: 10px;
+    font-family:verdana;
+    font-size:13px;
+    /*top:30%;*/
+    /*top: 50%;*/
+    /*margin-bottom: 45px;*/
+    height: auto;
+}
+
+.inner a.ok {padding:4px;color:#00ff2e;text-decoration:none;}
+.inner a.info {padding-left:5px;text-decoration:none;color:#faff00;}
+/* COOKIES */
+
+.btn.disabled, .btn:disabled{
+    color: #FFF !important;
+    opacity: 0.15 !important;
+}
+
+#btn_cerrado.disabled, #btn_cerrado:disabled{
+    color: #000 !important;
+    opacity: 0.15 !important;
+    text-decoration: none !important;
+}
+
+/* TABLE POLITICA PRIVACIDAD */
+table.tabPolitica tr, table.tabPolitica td, table.tabPolitica th {
+    padding: 1rem;
+    border: 1px solid #ccc;
+}
+
+table.tabPolitica th {
+    background-color: #165591;
+    color: #FFF;
+}
+
+th {
+    text-align: inherit;
+}
+/* TABLE POLITICA PRIVACIDAD */
+
+
+
+/* MEDIAQUERIES */
+@media (max-width: 768px) {
+
+    .sticky {
+        position: relative;
+        top: 0;
+        z-index: 1000;
+    }
+
+    #logoMayo img{ width: 90% !important; }
+
+    .btn_menu{ font-size: 14px !important; }
+
+    #menu_lines{
+        /*width: 12% !important;*/
+        font-size: 16px !important;
+    }
+
+    /* MENU */
+    .nav-link::after {
+        content: none;
+        padding-left:0;
+    }
+
+    .tit-reserva{
+        font-size: 32px;
+    }
+
+
+    div#toolbar{
+        margin-top:5px;
+        margin-bottom:25px;
+        text-align: center !important;
+    }
+
+    div#logoMayo{
+        text-align: center !important;
+    }
+
+    div#navbarNav.navbar-collapse{
+        text-align: center !important;
+    }
+
+    button.navbar-toggler{
+        margin-top: 20px  !important;;
+    }
+
+    #btnUser{
+        margin-right: 7px;
+    }
+
+    #logoMayoFooter{
+        /*text-align: left !important;*/
+        width: 70%;
+    }
+
+    #mayoFooter{
+        text-align: center !important;
+    }
+
+    .social{
+        display:none;
+    }
+
+    #myBtn {
+        right: 4px;
+    }
+
+    #registro-form select{
+        /*width: 100% !important;;*/
+        /*max-width: 250px !important;*/
+        max-width: 235px !important;
+    }
+
+
+}
+
+
+@media (width: 768px) {
+
+     #registro-form select{
+        max-width: 210px !important;
+    }
+
+    #logoMayo img{ width: 150% !important; }
+
+}

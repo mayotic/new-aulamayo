@@ -1,0 +1,19 @@
+body.home .container img {
+  width: 100%;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-size: 17px 17px;
+  background-color: rgba(0,0,0,.5);
+  padding: 15px;
+  border-radius: 100%;
+}
+
+.carousel-control-prev {
+    margin-left: -48px;
+}
+
+.carousel-control-next {
+    margin-right: -48px;
+}

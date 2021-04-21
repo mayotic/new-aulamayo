@@ -1,0 +1,89 @@
+*{
+	overflow-x: hidden;
+}
+
+.navbar {
+  /*box-shadow: 2px 2px 5px #000;*/
+  /*opacity: 0.9;*/
+}
+
+.navbar .nav-item .nav-link {
+  color: #195379;
+}
+
+.divider-vertical-menu{
+    height: 20px; 
+    width: 1px; 
+    margin: 10px 5px; 
+    overflow: hidden; 
+    /*background-color: #DDD;*/ 
+    border-right: 1px solid #195379;
+}
+
+.main-header {
+  position: relative;
+  background: url(../img/background-team3.jpg);
+  background-size: cover;
+  min-height: 400px;
+}
+
+.background-overlay {
+  background: rgba(48, 51, 107,.7);
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 400px;
+}
+
+.icon-whyaulamayo img{
+    transition: all 300ms
+}
+
+.icon-whyaulamayo img:hover{
+    cursor: pointer;
+    opacity: 0.8;
+    transform: scale(1.1, 1.1);
+}
+
+div.card-canal:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.card-canal a:link, div.card-canal a:visited, div.card-canal a:hover , div.card-canal a:active {
+    text-decoration: none;
+}
+
+.border-subfooterrightgrey{
+    border-right: 1px solid #DDD;
+}
+
+.search-input{
+    max-width: 500px;
+}
+
+.btn-search-cursos{
+    background-color: #FFF;
+    color: grey;
+}
+
+/* ACORDION BOTTSTRAP*/
+.card-header{
+    cursor: pointer;
+}
+
+.accordion .card-header:after {
+    font-family: 'FontAwesome';  
+    font-weight: bold;
+    font-size: 22px;
+    /*content: "\f068";*/
+    content: "-";
+    float: right; 
+}
+.accordion .card-header.collapsed:after {
+    /* symbol for "collapsed" panels */
+    /*content: "\f067";*/
+    font-weight: bold;
+    font-size: 22px;
+    content: "+"; 
+}
