@@ -45,7 +45,7 @@ include_once 'autoincludes.php';
 include_once $conf['app']['root'] . '/include/tools.php';
 
 // Pdox
-// include_once $conf['app']['root'] . '/include/pdox/Cache.php';
+include_once $conf['app']['root'] . '/include/pdox/Cache.php';
 include_once $conf['app']['root'] . '/include/pdox/PdoxInterface.php';
 include_once $conf['app']['root'] . '/include/pdox/Pdox.php';
 // Auth library

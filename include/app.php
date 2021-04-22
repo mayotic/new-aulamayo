@@ -3,24 +3,24 @@ defined('_DA') or exit('Restricted Access');
 // include_once $_SERVER['DOCUMENT_ROOT'] . '/cms/core.php';
 
 // Config for app
-$appconf = Tools::loadInclude('', 'appconf');
+// $appconf = Tools::loadInclude('', 'appconf');
 
-Tools::loadPdox();
-Tools::loadPhpMailer();
+// Tools::loadPdox();
+// Tools::loadPhpMailer();
 
 class App {
-  static $dba;
+  // static $dba;
   static $dbx;
   public static function init() {
-    self::$dba = new Medoo([
-                      'database_type'  => 'mysql',
-                      'database_name'  => _DB,
-                      'server'         => _HOST,
-                      'username'       => _USER,
-                      'password'       => _PASS,
-                      'charset'        => 'utf8',
-                      'collation'      => 'utf8_general_ci'
-                    ]);
+    // self::$dba = new Medoo([
+    //                   'database_type'  => 'mysql',
+    //                   'database_name'  => _DB,
+    //                   'server'         => _HOST,
+    //                   'username'       => _USER,
+    //                   'password'       => _PASS,
+    //                   'charset'        => 'utf8',
+    //                   'collation'      => 'utf8_general_ci'
+    //                 ]);
 
                     $config = [
                       'driver'	    => 'mysql',
@@ -36,15 +36,15 @@ class App {
   }
   public static function getUserTipe($user_id) {
     global $conf;
-    return (int)self::$dba
-                ->query( "SELECT id_tipo_inscrito FROM inscritos WHERE id_inscrito = $user_id")
-                ->fetch()['id_tipo_inscrito'];
+    return (int)self::$dbx
+                ->query( "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $user_id")
+                ->fetch('array')['id_tipo_usuario'];
   }
   public static function getUserTypeName($user_id) {
     global $conf;
-    return self::$dba
-                ->query( "SELECT tipos_inscrito.nombre FROM inscritos JOIN tipos_inscrito ON inscritos.id_tipo_inscrito = tipos_inscrito.id_tipo_inscrito WHERE id_inscrito = $user_id" )
-                ->fetch()['nombre'];
+    return self::$dbx
+                ->query( "SELECT tipos_usuario.nombre FROM usuarios JOIN tipos_usuario ON usuarios.id_tipo_usuario = tipos_usuario.id_tipo_usuario WHERE id_usuario = $user_id" )
+                ->fetch('array')['nombre'];
 
   }
 

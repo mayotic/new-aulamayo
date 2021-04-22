@@ -64,6 +64,7 @@ $tdata['pagetitle'] = ucfirst(AutoIncludes::getFileName(true));
     echo Tools::loadLibrary('js', 'subject-observer');
     echo Tools::loadLibrary('js', 'jquery.dateformat.min');
     echo Tools::loadLibrary('js', 'jquery-paginator');
+    echo Tools::loadLibrary('js', 'sweetalert2.all.min');
 
     // get the user loged in for js
     // echo Tools::exportUserToJs();
